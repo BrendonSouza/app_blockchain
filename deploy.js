@@ -4,6 +4,7 @@ require("dotenv").config();
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 //Construtor do Web3
 const Web3 = require("web3");
+const fs = require("fs");
 
 // Importar o codigo dos bytecodes e da interface
 const { abi, evm } = require("./compile");
@@ -13,6 +14,8 @@ const provider = new HDWalletProvider({
   mnemonic: { phrase: process.env.mnemonic },
   providerOrUrl: process.env.provider,
 });
+
+
 
 // Enviamos para o Web3 o provider
 const web3 = new Web3(provider);
@@ -57,6 +60,9 @@ const deploy = async () => {
     console.log(error);
   }
   // chamado para fechar o provider de forma adequada
+  //save abi in file
+  fs.writeFileSync("abi.json", JSON.stringify(abi));
   provider.engine.stop();
+
 };
 deploy();
