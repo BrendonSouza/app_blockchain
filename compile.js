@@ -3,7 +3,7 @@ const fs = require("fs"); // e garantir a compatibilidade de sistemas operaciona
 const solc = require("solc");
 
 // Pega o arquivo Inbox.sol e atribui a variável
-const LoteriaPath = path.resolve(__dirname, "contracts", "Register.sol");
+const LoteriaPath = path.resolve(__dirname, "contracts", "Vehicle.sol");
 const source = fs.readFileSync(LoteriaPath, "utf8");
 
 // * Mais informações sobre o input e output
@@ -11,7 +11,7 @@ const source = fs.readFileSync(LoteriaPath, "utf8");
 var input = {
   language: "Solidity",
   sources: {
-    "Register.sol": {
+    "Vehicle.sol": {
       content: source,
     },
     // Pode-se adicionar outros contratos, caso exista
@@ -26,4 +26,4 @@ var input = {
 };
 let contratoCompilado = JSON.parse(solc.compile(JSON.stringify(input)));
 
-module.exports = contratoCompilado.contracts["Register.sol"].Register;
+module.exports = contratoCompilado.contracts["Vehicle.sol"].Sale;
